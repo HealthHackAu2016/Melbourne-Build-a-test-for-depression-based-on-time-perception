@@ -68,6 +68,7 @@ export class CoreLayout extends Component {
           docked={false}
           open={this.state.isMobileMenuOpen}
           isAuth={isAuth}
+          user={user}
         />
         <div className={style.mainContainer}>
           {childrenWithProps}

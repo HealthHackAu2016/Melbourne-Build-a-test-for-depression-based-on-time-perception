@@ -2,7 +2,6 @@
 import ProfileEditRoute from './routes/ProfileEdit'
 import SecurityRoute from './routes/Security/'
 import UserSettings from './routes/UserSettings/'
-import { requireAuth } from 'utils/authHelper'
 export default (store) => ({
   path: 'user',
   childRoutes: [
@@ -28,9 +27,5 @@ export default (store) => ({
 
     /* Webpack named bundle   */
     }, 'User')
-  },
-  onEnter (nextState, replace, callback) {
-    // make sure user is authenticated before route can be access
-    requireAuth(store, nextState, replace, callback)
   }
 })

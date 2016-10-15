@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import sty from './AuthButton.scss'
 import RaisedButton from 'material-ui/RaisedButton'
+import browser from 'detect-browser'
 
 export default function AuthButton ({label, type, childType, link, backgroundColor, handleClick}) {
   if (childType === 'none') {
@@ -15,6 +16,9 @@ export default function AuthButton ({label, type, childType, link, backgroundCol
     />
   }
   if (childType === 'input') {
+    if (browser.name === 'firefox') {
+      return <button type='submit' className={sty.firefox}>{label}</button>
+    }
     return <RaisedButton
       label={label}
       primary={type === 'primary'}
@@ -31,14 +35,14 @@ export default function AuthButton ({label, type, childType, link, backgroundCol
     return <RaisedButton
       label={label}
       primary={type === 'primary'}
-      secondary={type === 'secondary'}
       labelPosition='before'
+      secondary={type === 'secondary'}
       className={sty.button}
       backgroundColor={backgroundColor}
       onTouchTap={handleClick}
-    >
-      <a href={link} className={sty.input}></a>
-    </RaisedButton>
+      href={link}
+      fullWidth
+    />
   }
 }
 
@@ -49,5 +53,4 @@ AuthButton.propTypes = {
   link: PropTypes.string,
   backgroundColor: PropTypes.string,
   handleClick: PropTypes.func
-
 }

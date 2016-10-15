@@ -15,7 +15,7 @@ export default function Signup ({
   handleSubmit, firstName, lastName, email, password, loading, emailSignup, width, handleExpand, formExpand, googleOauthUrl, githubOauthUrl
 }) {
   const oAuthTextLinks = <div>
-    Sign up with <a href='#'>Google</a> or <a href='#'>Facebook</a>
+    Sign up with <a href={googleOauthUrl}>Google</a> or <a href={githubOauthUrl}>Github</a>
   </div>
   const oAuthButtons = [
     <AuthButton
@@ -114,7 +114,7 @@ export default function Signup ({
           <div className={sty.signup}>
             <div className={sty.signupText}>Already have an account?</div>
             <Link to='/login'>
-              <RaisedButton label='Login'labelPosition='before' backgroundColor={grey300} />
+              <RaisedButton label='Login' labelPosition='before' backgroundColor={grey300} />
             </Link>
           </div>
         </CardActions>

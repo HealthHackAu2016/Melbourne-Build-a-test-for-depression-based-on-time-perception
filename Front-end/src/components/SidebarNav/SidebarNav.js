@@ -1,26 +1,50 @@
 import React, { PropTypes } from 'react'
 import Drawer from 'material-ui/Drawer'
-import {MenuItem} from 'material-ui/Menu'
+import { MenuItem } from 'material-ui/Menu'
 import {Link} from 'react-router'
+import NoteAddIcon from 'material-ui/svg-icons/action/note-add'
+import AccountBox from 'material-ui/svg-icons/action/account-box'
+import Home from 'material-ui/svg-icons/action/home'
+import ArrowIn from 'material-ui/svg-icons/action/input'
+import SignUpIcon from 'material-ui/svg-icons/action/open-in-browser'
+import PollIcon from 'material-ui/svg-icons/social/poll'
 
 const menuItemStylefix = {WebkitAppearance: 'none', cursor: 'pointer'}
 
-export function SidebarNav ({
-  docked, onSidebarLinkClick, open, onSidebarActivate, isAuth, onSidebarLogOutClick
+export default function SidebarNav ({
+  docked, onSidebarLinkClick, open, onSidebarActivate, isAuth, onSidebarLogOutClick, user
 }) {
   const authenticatedLinks = [
-    <Link to='/user/profile/edit' style={{textDecoration: 'none'}} key={1}>
+    <Link to={`/users/profile/${user._id}`} style={{textDecoration: 'none'}} key={1}>
+      <MenuItem
+        primaryText='My Polls'
+        style={menuItemStylefix}
+        onTouchTap={onSidebarLinkClick}
+        rightIcon={<PollIcon />}
+      />
+    </Link>,
+    <Link to='/user/profile/edit' style={{textDecoration: 'none'}} key={2}>
       <MenuItem
         primaryText='Account'
         style={menuItemStylefix}
         onTouchTap={onSidebarLinkClick}
+        rightIcon={<AccountBox />}
+      />
+    </Link>,
+    <Link to='/makePoll' style={{textDecoration: 'none'}} key={3}>
+      <MenuItem
+        primaryText='Create Poll'
+        style={menuItemStylefix}
+        onTouchTap={onSidebarLinkClick}
+        rightIcon={<NoteAddIcon />}
       />
     </Link>,
     <MenuItem
       primaryText='Log out'
       style={menuItemStylefix}
       onTouchTap={onSidebarLogOutClick}
-      key={2}
+      rightIcon={<ArrowIn />}
+      key={4}
     />
   ]
 
@@ -29,6 +53,7 @@ export function SidebarNav ({
       <MenuItem
         primaryText='Login'
         style={menuItemStylefix}
+        rightIcon={<ArrowIn />}
         onTouchTap={onSidebarLinkClick}
       />
     </Link>,
@@ -36,6 +61,7 @@ export function SidebarNav ({
       <MenuItem
         primaryText='Sign up'
         style={menuItemStylefix}
+        rightIcon={<SignUpIcon />}
         onTouchTap={onSidebarLinkClick}
       />
     </Link>
@@ -51,6 +77,7 @@ export function SidebarNav ({
         <MenuItem
           primaryText='Home'
           style={menuItemStylefix}
+          rightIcon={<Home />}
           onTouchTap={onSidebarLinkClick}
         />
       </Link>
@@ -65,7 +92,6 @@ SidebarNav.propTypes = {
   onSidebarLogOutClick: PropTypes.func.isRequired,
   onSidebarActivate: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
-  isAuth: PropTypes.bool.isRequired
+  isAuth: PropTypes.bool.isRequired,
+  user: PropTypes.object.isRequired
 }
-
-export default SidebarNav

@@ -2,10 +2,6 @@
   "name": "react-redux-starter-kit",
   "version": "3.0.0-alpha.1",
   "description": "Get started with React, Redux, and React-Router!",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/davezuko/react-redux-starter-kit.git"
-  },
   "main": "index.js",
   "engines": {
     "node": ">=4.2.0",
@@ -16,7 +12,9 @@
     "compile": "better-npm-run compile",
     "lint": "eslint src tests server",
     "lint:fix": "npm run lint -- --fix",
-    "start": "better-npm-run start",
+    "start": "better-npm-run start:prod",
+    "serve": "better-npm-run start",
+    "postinstall": "npm run deploy:prod",
     "dev": "better-npm-run dev",
     "dev:no-debug": "npm run dev -- --no_debug",
     "test": "better-npm-run test",
@@ -31,6 +29,12 @@
       "command": "babel-node bin/compile",
       "env": {
         "DEBUG": "app:*"
+      }
+    },
+    "start:prod": {
+      "command": "babel-node bin/server",
+      "env": {
+        "NODE_ENV": "production"
       }
     },
     "dev": {
@@ -74,6 +78,10 @@
       }
     }
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davezuko/react-redux-starter-kit.git"
+  },
   "author": "David Zukowski <david@zuko.me> (http://zuko.me)",
   "license": "MIT",
   "dependencies": {
@@ -93,10 +101,10 @@
     "css-loader": "^0.23.0",
     "cssnano": "^3.3.2",
     "debug": "^2.2.0",
+    "detect-browser": "^1.4.0",
     "extract-text-webpack-plugin": "^1.0.0",
     "file-loader": "^0.9.0",
     "fs-extra": "^0.30.0",
-    "hacktimer": "^1.1.0",
     "history": "^2.0.0",
     "html-webpack-plugin": "^2.7.1",
     "imports-loader": "^0.6.5",
@@ -108,6 +116,7 @@
     "koa-proxy": "^0.6.0",
     "koa-static": "^3.0.0",
     "material-ui": "^0.15.2",
+    "moment": "^2.14.1",
     "node-sass": "^3.7.0",
     "normalize.css": "^4.1.1",
     "postcss-loader": "^0.9.0",
@@ -116,9 +125,10 @@
     "react-redux": "^4.0.0",
     "react-router": "^2.2.0",
     "react-router-redux": "^4.0.0",
+    "react-share": "^1.8.5",
     "react-sizeme": "^2.1.2",
     "react-tap-event-plugin": "^1.0.0",
-    "recharts": "^0.15.2",
+    "recharts": "^0.13.0",
     "redux": "^3.0.0",
     "redux-form": "^5.3.1",
     "redux-thunk": "^2.0.0",

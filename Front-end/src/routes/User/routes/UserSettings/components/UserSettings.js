@@ -5,7 +5,6 @@ import CardHeader from 'material-ui/Card/CardHeader'
 import CardText from 'material-ui/Card/CardText'
 import RefreshIndicator from 'material-ui/RefreshIndicator'
 import RaisedButton from 'material-ui/RaisedButton'
-import { small } from 'utils/windowsize.js'
 import { grey400 } from 'material-ui/styles/colors'
 import sty from './UserSettings.scss'
 
@@ -26,7 +25,7 @@ export const UserSettings = ({handleDelete, loading, width}) => (
         {loading ? <div className={sty.loading}>
           <RefreshIndicator
             size={50}
-            left={width === small ? 135 : 221}
+            left={width <= 493 ? 135 : 221}
             top={0}
             loadingColor={'#FF9800'}
             status='loading'

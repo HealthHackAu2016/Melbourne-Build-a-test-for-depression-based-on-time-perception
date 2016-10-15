@@ -35,7 +35,7 @@ export const getCurrentUser = () => (dispatch) => {
   .catch((error) => {
     console.log(error)
     localStorage.removeItem('token')
-    dispatch(push('/signin'))
+    dispatch(push('/login'))
   })
 }
 
@@ -46,7 +46,15 @@ export const checkServerStatus = () => (dispatch, getState) => {
 
 // Reducer
 const initialState = {
-  currentUser: { firstName: '' },
+  currentUser: {
+    firstName: '',
+    lastName: '',
+    picture: '',
+    gender: '',
+    _id: '',
+    createdAt: '',
+    email: ''
+  },
   authenticated: false,
   // socket: null,
   serverOnline: false,

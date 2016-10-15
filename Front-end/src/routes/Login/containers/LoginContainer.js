@@ -37,7 +37,7 @@ export class LoginContainer extends Component {
   }
 
   render() {
-    const { handleSubmit, fields: { email, password }, login, emailLogin, width } = this.props
+    const { handleSubmit, fields: { email, password }, login, width } = this.props
     let githubOauthUrl = `${githubOauthParams.authorizationUrl}?${qs.stringify(githubOauthParams.params)}`
     let googleOauthUrl = `${googleOauthParams.authorizationUrl}?${qs.stringify(googleOauthParams.params)}`
     return (
@@ -47,7 +47,6 @@ export class LoginContainer extends Component {
           email={email}
           password={password}
           loading={login.loading}
-          emailLogin={emailLogin}
           width={width}
           handleRememberMe={this.handleRememberMe}
           check={this.state.check}

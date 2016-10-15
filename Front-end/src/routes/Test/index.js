@@ -1,7 +1,11 @@
 import { injectReducer } from 'store/reducers'
+import SecurityRoute from './routes/Security/'
 
 export default (store) => ({
-  path: 'Level1',
+  path: 'Test',
+  childRoutes: [
+    SecurityRoute(store) // test/security
+  ],
   /*  Async getComponent is only invoked when route matches   */
   getComponent (nextState, cb) {
     /*  Webpack - use 'require.ensure' to create a split point
@@ -9,16 +13,16 @@ export default (store) => ({
     require.ensure([], (require) => {
       /*  Webpack - use require callback to define
           dependencies for bundling   */
-      const Level1 = require('./containers/Level1Container').default
-      const reducer = require('./modules/Level1').default
+      const Test = require('./containers/TestContainer').default
+      const reducer = require('./modules/Test').default
 
       /*  Add the reducer to the store on key 'counter'  */
-      injectReducer(store, { key: 'Level1', reducer })
+      injectReducer(store, { key: 'Test', reducer })
 
       /*  Return getComponent   */
-      cb(null, Level1)
+      cb(null, Test)
 
     /* Webpack named bundle   */
-    }, 'Level1')
+    }, 'Test')
   }
 })

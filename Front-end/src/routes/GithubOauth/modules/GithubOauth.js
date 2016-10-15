@@ -23,6 +23,7 @@ export const githubOauthError = (error) => ({ type: GITHUB_OAUTH_ERROR, payload:
 
 export const githubLogin = (code) => (dispatch, getState) => {
   const params = { ...githubOauthParams.params, code }
+  console.log(params)
   const url = githubOauthParams.url
   dispatch(githubOauthStart())
   axios.post(url, params)

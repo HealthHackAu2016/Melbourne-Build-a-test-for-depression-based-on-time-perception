@@ -3,10 +3,10 @@ import { connect } from 'react-redux'
 import UserSettings from '../components/UserSettings'
 import { accountDelete } from '../modules/UserSettings'
 import SizeMe from 'react-sizeme'
-// import { push } from 'react-router-redux'
 import Modal from 'components/Modal'
 import RaisedButton from 'material-ui/RaisedButton'
 import { logOut } from 'redux/session'
+import FlatButton from 'material-ui/FlatButton'
 
 export class UserSettingsContainer extends Component {
   static propTypes = {
@@ -17,40 +17,70 @@ export class UserSettingsContainer extends Component {
     size: PropTypes.object.isRequired // from HOC SizeMe
   }
 
-  state = { open: false };
+  state = { open: false, message: '', title: '' };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.serverError.status !== this.props.serverError.status) {
-      this.setState({open: nextProps.serverError.status})
+      this.setState({
+        open: nextProps.serverError.status,
+        message: nextProps.serverError.message,
+        title: 'Server Error'
+      })
     }
     if (nextProps.successMessage !== this.props.successMessage) {
-      this.setState({open: true})
+      this.setState({open: true, message: nextProps.successMessage, title: 'Acccount Deleted'})
     }
   }
 
-  onAccountDelete = () => this.props.dispatch(accountDelete())
+  onAccountDelete = () => {
+    this.setState({open: false, message: ''})
+    this.props.dispatch(accountDelete())
+  }
 
   handleClose = () => {
-    this.setState({open: false})
-    if (this.props.successMessage !== '') { this.props.dispatch(logOut()) }
+    this.setState({open: false, message: '', title: ''})
+    if (this.state.message.includes('deleted')) { this.props.dispatch(logOut()) }
+  }
+
+  handleDelete = () => {
+    this.setState({
+      message: 'Please confirm if you want to permanently delete your account and all of your polls.',
+      open: true,
+      title: 'Delete Confirmation'
+    })
   }
 
   render() {
     const { serverError, successMessage, loading, size: {width} } = this.props
+    console.log(successMessage)
+    const deleteActions = [
+      <FlatButton
+        label='Dismiss' primary onTouchTap={this.handleClose}
+      />,
+      <RaisedButton
+        label='Confirm Delete' secondary onTouchTap={this.onAccountDelete}
+      />
+    ]
+    const action = <RaisedButton label='Dismiss' primary onTouchTap={this.handleClose} />
+
+    const actionOrDelete = () => {
+      if (!this.state.message.includes('deleted')) return deleteActions
+      return action
+    }
     return <div>
       <UserSettings
-        handleDelete={this.onAccountDelete}
+        handleDelete={this.handleDelete}
         loading={loading}
         width={width}
       />
       <Modal
-        title={serverError.status ? 'Setting Update Error' : 'Setting Update Success'}
+        title={this.state.title}
         modal={false}
         type={serverError.status ? 'error' : ''}
         open={this.state.open}
         handleClose={this.handleClose}
-        message={successMessage !== '' ? successMessage : serverError.message}
-        actions={<RaisedButton label='Dismiss' primary onTouchTap={this.handleClose} />}
+        message={this.state.message}
+        actions={actionOrDelete()}
       />
     </div>
   }

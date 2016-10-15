@@ -1,0 +1,41 @@
+@import 'base';
+
+.button {
+  min-width: 257px !important;
+  margin: 0.5em 0 !important;
+  @include MQ(SM) {
+    min-width: 430px !important;
+  }
+  button {
+    height: 46px !important;
+  }
+}
+
+.input {
+  cursor: pointer;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+}
+
+.firefox {
+  border: none;
+  background-color: rgb(0, 188, 212);
+  text-decoration: none;
+  color: #fff;
+  border-radius: 2px; 
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 0.9em;
+  padding: 0 16px;
+  cursor: pointer;
+  @include materialShadow(1);
+  &:hover {
+    @include materialShadow(2);
+  }
+  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}

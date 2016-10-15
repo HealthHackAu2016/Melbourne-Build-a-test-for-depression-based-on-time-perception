@@ -9,7 +9,10 @@ import GithubOauthCallbackRoute from './GithubOauth'
 import GoogleOauthCallbackRoute from './GoogleOauth'
 import NotFoundRoute from './NotFound'
 import UserRoute from './User'
-import Level1 from './Level1'
+import TestRoute from './Test'
+import UsersUnAuthRoute from './Users'
+import MakePollRoute from './MakePoll/'
+import PollFetchRoute from './PollFetch'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
@@ -17,7 +20,7 @@ import Level1 from './Level1'
 export const createRoutes = (store) => ({
   path: '/',
   component: CoreLayout,
-  indexRoute: Home,
+  indexRoute: Home(store),
   childRoutes: [
     LoginRoute(store),
     SignupRoute(store),
@@ -25,9 +28,12 @@ export const createRoutes = (store) => ({
     ResetPasswordRoute(store),
     GoogleOauthCallbackRoute(store),
     GithubOauthCallbackRoute(store),
-    UserRoute(store),
-    NotFoundRoute(store),
-    Level1(store)
+    PollFetchRoute(store), // /poll/:id
+    MakePollRoute(store), // /makePoll
+    UserRoute(store), // user
+    TestRoute(store), // user
+    UsersUnAuthRoute(store), // users
+    NotFoundRoute(store) // /*
   ]
 })
 
