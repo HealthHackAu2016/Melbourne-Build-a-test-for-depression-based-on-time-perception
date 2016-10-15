@@ -12,9 +12,12 @@ import net.servicestack.func.Func;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.UUID;
 
 import au.com.healthhack.timedilation.R;
+import au.com.healthhack.timedilation.dal.AppConfig;
+import au.com.healthhack.timedilation.dal.AppDatabaseHelper;
 import au.com.healthhack.timedilation.dal.TestSession;
 import au.com.healthhack.timedilation.dal.api.ApiConstants;
 import au.com.healthhack.timedilation.dal.api.IntervalTiming;
@@ -47,6 +50,7 @@ public class IntervalInstructionsActivity extends AppCompatActivity {
                     testSession = makeDistractorSession();
                     break;
             }
+
         }
 
         aq.id(R.id.text1).text(String.format("You will see %d sets of intervals, and will be asked to estimate the duration",
@@ -61,22 +65,25 @@ public class IntervalInstructionsActivity extends AppCompatActivity {
                         break;
                 }
                 if(intent!=null){
+                    testSession.StartTime=new Date();
+                    new AppDatabaseHelper(IntervalInstructionsActivity.this).insertUpdateTestSession(testSession);
                     intent.putExtra(IntentUtil.ARG_TEST_NAME, testName);
                     intent.putExtra(IntentUtil.ARG_TEST_SESSION, testSession);
                     startActivity(intent);
+                    finish();
                 }
             }
         });
     }
 
+
     private TestSession makeBasicSession(){
         TestSession result = new TestSession();
-        result.SessionId= UUID.randomUUID().toString();
+        result.TestName = ApiConstants.TEST_BASIC;
         result.TestResults = new ArrayList<>();
         //random list of intervals
         for(int i : new int[]{10,20,30,40,60,90}){
             TestResult screen = new TestResult();
-            screen.SessionId=result.SessionId;
             screen.TestName=ApiConstants.TEST_BASIC;
             IntervalTiming timing = new IntervalTiming();
             timing.OffsetFromStartTime=0;
@@ -86,11 +93,15 @@ public class IntervalInstructionsActivity extends AppCompatActivity {
         }
         //random order of intervals
         Collections.shuffle(result.TestResults);
+        result.setSessionId(UUID.randomUUID().toString());
+        String authId = getSharedPreferences(AppConfig.PREFS_FILE_USERPREFS,0).getString(AppConfig.PREF_KEY_AUTH_ID,null);
+        result.setAuthId(authId);
         return result;
     }
     private TestSession makeDistractorSession(){
         TestSession result = new TestSession();
         result.SessionId= UUID.randomUUID().toString();
+        result.TestName = ApiConstants.TEST_DISTRACTOR;
         result.TestResults = new ArrayList<>();
         //random list of intervals
         for(int i : new int[]{10,20,30,40,60,90}){
@@ -105,19 +116,22 @@ public class IntervalInstructionsActivity extends AppCompatActivity {
         }
         //random order of intervals
         Collections.shuffle(result.TestResults);
+        result.setSessionId(UUID.randomUUID().toString());
+        String authId = getSharedPreferences(AppConfig.PREFS_FILE_USERPREFS,0).getString(AppConfig.PREF_KEY_AUTH_ID,null);
+        result.setAuthId(authId);
         return result;
     }
     private TestSession makeSimultIntervalSession(){
         TestSession result = new TestSession();
-        result.SessionId= UUID.randomUUID().toString();
+        result.TestName = ApiConstants.TEST_SIMULTANEOUS_INTERVALS;
         result.TestResults = new ArrayList<>();
         //random list of intervals
         final ArrayList<Integer> firstDurations = Func.toList(new int[]{10, 20, 30, 40, 60, 90});
-        ArrayList<Integer> secondDurations = Func.toList(firstDurations);//clone
+        Collections.shuffle(firstDurations);
+        ArrayList<Integer> secondDurations = new ArrayList<>(firstDurations);//clone
         Collections.shuffle(secondDurations);
         for(int i =0;i<firstDurations.size();i++){
             TestResult screen = new TestResult();
-            screen.SessionId=result.SessionId;
             screen.TestName=ApiConstants.TEST_SIMULTANEOUS_INTERVALS;
             IntervalTiming firstDuration = new IntervalTiming();
             firstDuration.OffsetFromStartTime=0;
@@ -128,6 +142,9 @@ public class IntervalInstructionsActivity extends AppCompatActivity {
             screen.Timings= Func.toList(firstDuration,secondDuration);
             result.TestResults.add(screen);
         }
+        result.setSessionId(UUID.randomUUID().toString());
+        String authId = getSharedPreferences(AppConfig.PREFS_FILE_USERPREFS,0).getString(AppConfig.PREF_KEY_AUTH_ID,null);
+        result.setAuthId(authId);
         return result;
     }
 

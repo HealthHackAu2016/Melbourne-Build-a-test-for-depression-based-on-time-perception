@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.style.RelativeSizeSpan;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import au.com.healthhack.timedilation.R;
+import au.com.healthhack.timedilation.dal.AppDatabaseHelper;
 import au.com.healthhack.timedilation.dal.TestSession;
 import au.com.healthhack.timedilation.dal.api.TestResult;
 import au.com.healthhack.timedilation.util.IntentUtil;
@@ -28,6 +30,7 @@ import au.com.healthhack.timedilation.util.UIUtil;
 
 public class IntervalBasicActivity extends AppCompatActivity {
 
+    private static final String TAG = "IntervalBasic";
     private TestSession testSession;
     private int testIndex;
     private Button btnStartStop;
@@ -48,27 +51,37 @@ public class IntervalBasicActivity extends AppCompatActivity {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if(motionEvent.getAction()==MotionEvent.ACTION_DOWN){
                     Date now = new Date();
-                    if(testSession.TestResults.get(testIndex).StartTime==null){
+                    TestResult testResult = testSession.TestResults.get(testIndex);
+                    if(testResult.StartTime==null){
                         //START
-                        testSession.TestResults.get(testIndex).StartTime=now;
+                        testResult.StartTime=now;
                         btnStartStop.setText("Stop");
                         btnStartStop.setActivated(true);
                         aq.id(R.id.text_instructions).text("Hit stop to finish");
 
                     }
-                    else if (testSession.TestResults.get(testIndex).Timings.get(0).ActualDuration<=0){
-                        long duration =now.getTime()- testSession.TestResults.get(testIndex).StartTime.getTime();
-                        if(duration>2000){
-                            //debounce
+                    else if (testResult.Timings.get(0).ActualDuration<=0){
+                        long duration =now.getTime()- testResult.StartTime.getTime();
+                        if(duration>2000){ //debounce
                             //STOP
-                            testSession.TestResults.get(testIndex).Timings.get(0).ActualDuration=duration;
+                            testResult.Timings.get(0).ActualDuration=duration;
                             aq.id(R.id.text_instructions).text("Results");
                             btnStartStop.setActivated(false);
-                            btnStartStop.setText(testIndex<testSession.TestResults.size()-1?"Next":"Done");
+                            boolean hasNext = testIndex < testSession.TestResults.size() - 1;
+                            btnStartStop.setText(hasNext ?"Next":"Done");
                             aq.id(R.id.text_duration).text(formatDuration(duration));
-                            double v = (duration - testSession.TestResults.get(testIndex).Timings.get(0).ExpectedDuration) / 1000d;
+                            double v = (duration - testResult.Timings.get(0).ExpectedDuration) / 1000d;
                             aq.id(R.id.text_delta).visible().text(String.format("%s%.1f s", v>0?"+":"", v));
                             aq.id(R.id.lbl_actual_time).visible();
+                            AppDatabaseHelper databaseHelper = new AppDatabaseHelper(IntervalBasicActivity.this);
+                            long id = databaseHelper.insertTestResult(testResult);
+                            Log.d(TAG, "inserted: "+id);
+                            if(!hasNext){
+                                testSession.EndTime=now;
+                                databaseHelper.insertUpdateTestSession(testSession);
+                                String json = AppDatabaseHelper.getGson().toJson(testSession);
+                                Log.d(TAG, json);
+                            }
 
                         }
                     }else{

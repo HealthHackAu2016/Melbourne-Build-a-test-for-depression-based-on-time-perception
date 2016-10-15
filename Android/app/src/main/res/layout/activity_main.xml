@@ -14,9 +14,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_centerInParent="true">
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New basic test"
-        android:onClick="onBasicClicked"/>
+        android:tag="basic"
+        android:onClick="onStartTestClicked"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="History"
+            android:onClick="onHistoryClicked"/>
+    </LinearLayout>
 </RelativeLayout>

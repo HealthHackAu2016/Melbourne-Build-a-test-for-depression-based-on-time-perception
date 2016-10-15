@@ -19,6 +19,8 @@
             android:label="Instructions"/>
         <activity android:name=".activity.IntervalBasicActivity"
             android:label="Level 1"/>
+        <activity android:name=".activity.IntervalHistoryActivity"
+            android:label="History"/>
     </application>
 
 </manifest>
