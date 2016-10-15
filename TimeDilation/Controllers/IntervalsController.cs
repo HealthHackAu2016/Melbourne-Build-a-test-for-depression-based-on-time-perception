@@ -54,10 +54,20 @@ namespace TimeDilation.Controllers
     [RoutePrefix("api/Intervals")]
     public class IntervalsController : ApiController
     {
+        /// <summary>
+        /// Query saved results, by AuthId
+        /// </summary>
+        /// <param name="AuthId"></param>        
+        /// <param name="DateFrom"></param>
+        /// <param name="DateTo"></param>
+        /// <param name="TestName">Optional filter by test name</param>        
+        /// <returns></returns>
         [Route("QueryIntervals")]
-        public List<TestResult> Get(DateTime DateFrom, DateTime? DateTo, string AuthId)
+        public List<TestResult> Get(string AuthId, DateTime DateFrom, DateTime? DateTo, string TestName)
         {
-            return new List<TestResult>();
+            var results = new List<TestResult>();
+            
+            return results;
         }
         
 
