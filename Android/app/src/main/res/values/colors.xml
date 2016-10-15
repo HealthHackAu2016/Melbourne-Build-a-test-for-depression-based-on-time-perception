@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+    <color name="body_text_1">#000000</color>
+    <color name="body_text_2">#555555</color>
+    <color name="body_text_3">#858585</color>
+    <color name="body_text_disabled">#44000000</color>
+    <color name="body_text_disabled_inverse">#66cccccc</color>
+
+    <color name="body_text_1_inverse">#E9EDF0</color>
+    <color name="body_text_2_inverse">#99ffffff</color>
+
+    <color name="body_text_1_positive">#ff3f990f</color>
+    <color name="body_text_1_warning">#fff6bf26</color>
+    <color name="body_text_1_negative">#fff73e0f</color>
+
+    <color name="accent_1">#ffe06055</color>
+
+
+    <color name="separator_item_background">#ffC5CDD0</color>
+    <color name="separator_sub_background">#7f7f7f</color>
+
+
+    <color name="divider_faint">#eeeeee</color>
+
+    <color name="card_background">#eeeeee</color>
+    <color name="card_primary_cell_bg">#fffcfcfc</color>
+    <color name="card_activated_colour">@color/colorPrimary</color>
+
+
+
+    <color name="button_action">@color/colorPrimary</color>
+
+    <color name="button_alternate">#ff00A878</color>
+    <color name="button_login">#ffFF7043</color>
+
+
+    <color name="button_disabled">#ffC5CDD0</color>
+
+    <color name="button_pressed">@color/colorPrimary</color>
+    <color name="button_activated">#ffb341</color>
+    <color name="button_alternate_pressed">#ff00B883</color>
+
+</resources>
