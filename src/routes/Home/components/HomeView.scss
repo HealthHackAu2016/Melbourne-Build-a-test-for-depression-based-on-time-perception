@@ -1,5 +1,5 @@
-.duck {
-  display: block;
-  width: 120px;
+.container{
+  display: flex;
+  flex-flow: row nowrap;
   margin: 1.5rem auto;
 }

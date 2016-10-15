@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import createBrowserHistory from 'history/lib/createBrowserHistory'
+import { createHashHistory, useBasename } from 'history'
+/* import createBrowserHistory from 'history/lib/createBrowserHistory'*/
 import { useRouterHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import createStore from './store/createStore'
@@ -15,7 +16,7 @@ injectTapEventPlugin()
 // ========================================================
 // Browser History Setup
 // ========================================================
-const browserHistory = useRouterHistory(createBrowserHistory)({
+const browserHistory = useRouterHistory(createHashHistory)({
   basename: __BASENAME__
 })
 

@@ -2,6 +2,7 @@
   "name": "react-redux-starter-kit",
   "version": "3.0.0-alpha.1",
   "description": "Get started with React, Redux, and React-Router!",
+  "repository": "git@github.com:HealthHackAu2016/Melbourne-Build-a-test-for-depression-based-on-time-perception",
   "main": "index.js",
   "engines": {
     "node": ">=4.2.0",
@@ -117,6 +118,7 @@
     "react-router-redux": "^4.0.0",
     "react-sizeme": "^2.1.2",
     "react-tap-event-plugin": "^1.0.0",
+    "recharts": "^0.15.2",
     "redux": "^3.0.0",
     "redux-form": "^5.3.1",
     "redux-thunk": "^2.0.0",

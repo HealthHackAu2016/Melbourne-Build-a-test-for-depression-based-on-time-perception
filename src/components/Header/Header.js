@@ -20,7 +20,7 @@ export function Header ({
 }) {
   return (
     <AppBar
-      title={<IndexLink to='/' style={{color: 'white', textDecoration: 'none'}} onClick={handleTitleClick}>Health Hack</IndexLink>}
+      title={<IndexLink to='/' style={{color: 'white', textDecoration: 'none'}} onClick={handleTitleClick}>TDT</IndexLink>}
       showMenuIconButton={width < small}
       titleStyle={getStyle(width).appBarTitle}
       style={getStyle(width).appBar}
