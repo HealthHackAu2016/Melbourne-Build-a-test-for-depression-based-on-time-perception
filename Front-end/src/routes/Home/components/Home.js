@@ -16,10 +16,12 @@ export const Home = ({width, loading, onGameStart}) => {
     <Card className={sty.card}>
       <CardTitle
         className={sty.question}
-        title='Heading'
+        title='Welcome to time perception training'
       />
       <CardText>
-       Nullam eu ante vel est convallis dignissim.  Fusce suscipit, wisi nec facilisis facilisis, est dui fermentum leo, quis tempor ligula erat quis odio.  Nunc porta vulputate tellus.  Nunc rutrum turpis sed pede.  Sed bibendum.  Aliquam posuere.  Nunc aliquet, augue nec adipiscing interdum, lacus tellus malesuada massa, quis varius mi purus non odio.  Pellentesque condimentum, magna ut suscipit hendrerit, ipsum augue ornare nulla, non luctus diam neque sit amet urna.  Curabitur vulputate vestibulum lorem.  Fusce sagittis, libero non molestie mollis, magna orci ultrices dolor, at vulputate neque nulla lacinia eros.  Sed id ligula quis est convallis tempor.  Curabitur lacinia pulvinar nibh.  Nam a sapien.
+        Welcome to Tau - the time perception training game. Think you can keep time? Well, let’s find out how accurate you are. Better time perception has been linked to better mental health and so with practice you can not only improve how well you keep time, but also change your brain in unexpected ways.
+      </CardText>
+      <CardText>Practise once a day or as often as you like until you reach your timing potential. Don’t worry if you don’t make much progress to start with. It takes time to change your brain. The longer you do it, the better you will get.
       </CardText>
       <CardActions className={sty.makePollButton}>
         <RaisedButton
