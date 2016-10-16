@@ -1,0 +1,11 @@
+@import 'base';
+
+.container {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  h2 {
+    font-size: 5em;
+    margin-bottom: 0;
+  }
+}

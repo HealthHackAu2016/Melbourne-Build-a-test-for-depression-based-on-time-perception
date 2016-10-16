@@ -1,0 +1,12 @@
+@import 'base';
+
+.container {
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 2em auto;
+  width: 320px;
+  @include MQ(SM) {
+    margin: 2em auto;
+    width: 494px;
+  }
+}

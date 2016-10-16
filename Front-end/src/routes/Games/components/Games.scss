@@ -1,0 +1,18 @@
+@import 'base';
+
+.container {
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 2em auto;
+  width: 320px;
+  @include MQ(SM) {
+    margin: 2em auto;
+    width: 494px;
+  }
+}
+
+.card {
+  margin-top: 2em;
+  padding-bottom: 0.75em;
+  width: 100% !important;
+}

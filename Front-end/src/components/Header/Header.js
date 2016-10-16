@@ -25,7 +25,7 @@ export function Header ({
       to='/'
       style={{color: 'white', textDecoration: 'none'}}
       onClick={handleTitleClick}>
-      Pollwise
+      TAU
     </IndexLink>
   )
 
@@ -61,7 +61,6 @@ export function Header ({
   const authenticatedNavLinkButtons = (
     <div style={getStyle(width).navLinkButton}>
       <Link to='/makePoll' key={1}>
-        <RaisedButton label='Poll' icon={<NoteAddIcon />} />
       </Link>
       {dropDownMenuItems}
     </div>

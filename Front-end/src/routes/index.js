@@ -10,6 +10,8 @@ import GoogleOauthCallbackRoute from './GoogleOauth'
 import NotFoundRoute from './NotFound'
 import UserRoute from './User'
 import TestRoute from './Test'
+import GamesRoute from './Games'
+import Level1Route from './Level1'
 import UsersUnAuthRoute from './Users'
 import MakePollRoute from './MakePoll/'
 import PollFetchRoute from './PollFetch'
@@ -32,6 +34,8 @@ export const createRoutes = (store) => ({
     MakePollRoute(store), // /makePoll
     UserRoute(store), // user
     TestRoute(store), // user
+    GamesRoute(store), // user
+    Level1Route(store), // user
     UsersUnAuthRoute(store), // users
     NotFoundRoute(store) // /*
   ]

@@ -54,7 +54,7 @@ export class HomeContainer extends Component {
     console.log('game starting')
     const {authenticated, dispatch} = this.props
     if (authenticated) {
-      dispatch(push('/makePoll'))
+      dispatch(push('/games'))
     }
     dispatch(homeFetchError({message: 'Log in or signup to start the game', status: true}))
   }
