@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
             aItems.add(level);
 
             level = new LevelItem();
-            level.testName=ApiConstants.TEST_SIMULTANEOUS_INTERVALS;
+            level.testName=ApiConstants.TEST_DISTRACTOR;
             level.text1="Level 3";
             level.text2="Intervals with distractions";
             level.isLocked=aItems.get(aItems.size()-1).completedSessions==0; //locked if previous level incomplete
@@ -156,11 +156,11 @@ public class MainActivity extends AppCompatActivity {
                     if(item.isLocked){
                         Toast.makeText(MainActivity.this, "Level locked. Complete the previous level first", Toast.LENGTH_SHORT).show();
                     }
-                    else{
+
                         Intent intent = new Intent(MainActivity.this, IntervalInstructionsActivity.class);
                         intent.putExtra(IntentUtil.ARG_TEST_NAME, item.testName);
                         startActivity(intent);
-                    }
+
                 }
             });
             return vh;

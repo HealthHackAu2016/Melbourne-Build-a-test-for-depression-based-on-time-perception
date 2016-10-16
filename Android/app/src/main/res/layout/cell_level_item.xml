@@ -37,6 +37,7 @@
        android:layout_height="wrap_content"
        android:id="@+id/lbl_new"
        android:text="NEW"
+       android:textColor="@color/body_text_1"
        android:layout_alignParentRight="true"
        android:background="@color/body_text_disabled"/>
    <ImageView

@@ -21,6 +21,10 @@
             android:label="Level 1"/>
         <activity android:name=".activity.IntervalHistoryActivity"
             android:label="History"/>
+        <activity android:name=".activity.IntervalSimultActivity"
+            android:label="Level 2"/>
+        <activity android:name=".activity.IntervalDistractorActivity"
+            android:label="Level 3" />
     </application>
 
 </manifest>

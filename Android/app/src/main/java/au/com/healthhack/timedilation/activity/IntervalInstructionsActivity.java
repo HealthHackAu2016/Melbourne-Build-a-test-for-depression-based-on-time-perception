@@ -63,6 +63,12 @@ public class IntervalInstructionsActivity extends AppCompatActivity {
                     case ApiConstants.TEST_BASIC:
                         intent = new Intent(IntervalInstructionsActivity.this, IntervalBasicActivity.class);
                         break;
+                    case ApiConstants.TEST_SIMULTANEOUS_INTERVALS:
+                        intent = new Intent(IntervalInstructionsActivity.this, IntervalSimultActivity.class);
+                        break;
+                    case ApiConstants.TEST_DISTRACTOR:
+                        intent = new Intent(IntervalInstructionsActivity.this, IntervalDistractorActivity.class);
+                        break;
                 }
                 if(intent!=null){
                     testSession.StartTime=new Date();
