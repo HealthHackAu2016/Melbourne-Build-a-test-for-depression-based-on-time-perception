@@ -69,7 +69,7 @@ public class IntervalHistoryActivity extends AppCompatActivity {
             String heading = StringUtils.formatDate(new Date(cursor.getLong(cursor.getColumnIndex("StartTime"))),StringUtils.DATE_AND_TIME_STANDARD);
             heading+=": "+ cursor.getString(cursor.getColumnIndex("TestName"));
             double sessionScore = cursor.getDouble(cursor.getColumnIndex("SessionScore"));
-            String subText = sessionScore!=0?String.format("Score: %.1f%%", sessionScore*100):"incomplete";
+            String subText = sessionScore!=0?String.format("Score: %.1f%%", sessionScore):"incomplete";
             vh.aq().id(R.id.text1).text(heading);
             vh.aq().id(R.id.text2).text(subText);
         }

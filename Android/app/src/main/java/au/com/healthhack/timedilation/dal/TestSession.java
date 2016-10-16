@@ -43,7 +43,7 @@ public class TestSession implements Serializable {
                 if(score==0)return 0;//incomplete
                 sum+=score;
             }
-            return sum/TestResults.size();
+            return (sum/TestResults.size());
         }
         return 0;
     }

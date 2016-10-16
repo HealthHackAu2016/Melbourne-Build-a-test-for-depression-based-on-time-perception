@@ -26,9 +26,10 @@ public class TestResult implements Serializable{
             double sum = 0;
             for(IntervalTiming timing:Timings){
                 if(timing.ActualDuration<=0)return 0;//not finished
-                sum+=(Math.abs(timing.ActualDuration-timing.ExpectedDuration))/(double)timing.ExpectedDuration;
+                double score = Math.sqrt(Math.pow((timing.ActualDuration-timing.ExpectedDuration),2))/(double)timing.ExpectedDuration;
+                sum+=score;
             }
-            return sum/Timings.size();
+            return 100f-(100f*(sum/Timings.size()));
         }
         return 0;
     }

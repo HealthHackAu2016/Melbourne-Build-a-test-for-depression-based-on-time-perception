@@ -1,5 +1,6 @@
 package au.com.healthhack.timedilation.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.androidquery.AQuery;
 
@@ -71,7 +73,7 @@ public class IntervalBasicActivity extends AppCompatActivity {
                             btnStartStop.setText(hasNext ?"Next":"Done");
                             aq.id(R.id.text_duration).text(formatDuration(duration));
                             double v = (duration - testResult.Timings.get(0).ExpectedDuration) / 1000d;
-                            aq.id(R.id.text_delta).visible().text(String.format("%s%.1f s", v>0?"+":"", v));
+
                             aq.id(R.id.lbl_actual_time).visible();
                             AppDatabaseHelper databaseHelper = new AppDatabaseHelper(IntervalBasicActivity.this);
                             long id = databaseHelper.insertTestResult(testResult);
@@ -82,7 +84,11 @@ public class IntervalBasicActivity extends AppCompatActivity {
                                 String json = AppDatabaseHelper.getGson().toJson(testSession);
                                 Log.d(TAG, json);
                             }
-
+                            String strDelta = String.format("%s%.1f s", v > 0 ? "+" : "", v);
+                            if(!hasNext){
+                                strDelta+=String.format("\nSession score: %.1f%%",testSession.calculateSessionScore());
+                            }
+                            aq.id(R.id.text_delta).visible().text(strDelta);
                         }
                     }else{
                         btnStartStop.setActivated(false);
@@ -102,6 +108,14 @@ public class IntervalBasicActivity extends AppCompatActivity {
         });
         loadTest();
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putSerializable(IntentUtil.ARG_TEST_SESSION, testSession);
+        outState.putInt("testIndex", testIndex);
+        super.onSaveInstanceState(outState);
+    }
+
     private CharSequence formatDuration(long duration){
         UIUtil.SpannableStringBuilder sb = new UIUtil.SpannableStringBuilder();
         double seconds = duration/1000d;
@@ -135,12 +149,16 @@ public class IntervalBasicActivity extends AppCompatActivity {
         aq.id(R.id.text_instructions).text("Hit start to begin");
 
         ViewGroup tabContainer = (ViewGroup) findViewById(R.id.tabs_progress_container);
-        if(tabContainer.getChildCount()!=testSession.TestResults.size()){
-            tabContainer.removeAllViews();
-            for(int i=0;i<testSession.TestResults.size();i++){
-                View view = new View(this);
-
+        float density = getResources().getDisplayMetrics().density;
+        int densityDpi = getResources().getDisplayMetrics().densityDpi;
+        tabContainer.removeAllViews();
+        for(int i=0;i<testSession.TestResults.size();i++){
+            View view = new View(this);
+            view.setBackgroundColor(i>testIndex?Color.GRAY:Color.BLACK);
+            int p = (int) (4*density+0.5f);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT,1);
+            lp.setMargins(0,0,p,0);
+            tabContainer.addView(view, lp);
             }
-        }
     }
 }
