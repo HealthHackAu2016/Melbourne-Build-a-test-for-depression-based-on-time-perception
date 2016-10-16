@@ -8,7 +8,7 @@ export const <%= pascalEntityName %> = () => (
 )
 
 <%= pascalEntityName %>.propTypes = {
-  : PropTypes.
+  // : PropTypes.
 }
 
 export default <%= pascalEntityName %>

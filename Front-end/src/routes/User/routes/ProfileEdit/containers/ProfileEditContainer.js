@@ -13,8 +13,8 @@ export class ProfileEditContainer extends Component {
     fields: PropTypes.object.isRequired, // from redux-form
     userProfileUpdate: PropTypes.func.isRequired, // from authenticate action
     getUserProfile: PropTypes.func.isRequired, // from authenticate action
-    serverError: PropTypes.object, // from auth reducer
-    loading: PropTypes.bool.isRequired, // from auth reducer
+    serverError: PropTypes.object,
+    loading: PropTypes.bool.isRequired,
     successMessage: PropTypes.string,
     initialValues: PropTypes.object,
     size: PropTypes.object.isRequired // from HOC SizeMe

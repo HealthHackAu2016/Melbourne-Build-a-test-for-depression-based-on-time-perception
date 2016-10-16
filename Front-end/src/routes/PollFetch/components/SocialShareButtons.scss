@@ -1,0 +1,9 @@
+.socialButtons {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+}
+
+.button {
+  transform: translate3d(-4px, -4px, 0px);
+}

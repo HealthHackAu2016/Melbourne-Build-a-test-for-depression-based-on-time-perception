@@ -3,7 +3,7 @@ import sty from './NotFound.scss'
 import { Link } from 'react-router'
 import {List, ListItem} from 'material-ui/List'
 import ActionHome from 'material-ui/svg-icons/action/home'
-import ActionAccountBox from 'material-ui/svg-icons/action/account-box'
+import AccountBox from 'material-ui/svg-icons/action/account-box'
 
 export const NotFound = () => (
   <div className={sty.container}>
@@ -15,7 +15,7 @@ export const NotFound = () => (
         <ListItem primaryText='Home' leftIcon={<ActionHome />} />
       </Link>
       <Link to='/user/edit' style={{textDecoration: 'none'}}>
-        <ListItem primaryText='Profile' leftIcon={<ActionAccountBox />} />
+        <ListItem primaryText='Profile' leftIcon={<AccountBox />} />
       </Link>
     </List>
   </div>
