@@ -32,88 +32,28 @@
     android:layout_width="match_parent"
     android:layout_height="300dp"
     android:gravity="center_vertical"
+    android:id="@+id/intervals_container"
     android:orientation="horizontal">
 
-    <LinearLayout
+    <include
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:layout_marginRight="2dp"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
-    <TextView
-        android:layout_marginTop="40dp"
-        android:id="@+id/lbl_actual_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Your time" />
-    <TextView
-        android:id="@+id/text_duration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        style="@style/DurationText"
-        android:text="30"/>
-    <TextView
-        android:id="@+id/text_delta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="+4s" />
-    <View
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
-    <Button
-        android:layout_marginTop="40dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Start"
-        android:textAllCaps="false"
-        android:background="@drawable/button_start_stop"
-        android:id="@+id/button_start_stop"/>
-        </LinearLayout>
-    <LinearLayout
+        android:id="@+id/include_simultaneous_container_1"
+        layout="@layout/include_simultaneous_interval"
+        />
+
+    <include
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:gravity="center_horizontal"
         android:layout_weight="1"
-        android:orientation="vertical">
-        <TextView
-            android:layout_marginTop="40dp"
-            android:id="@+id/lbl_actual_time2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Your time" />
-        <TextView
-            android:id="@+id/text_duration2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            style="@style/DurationText"
-            android:text="30"/>
-        <TextView
-            android:id="@+id/text_delta2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="+4s" />
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-        <Button
-            android:layout_marginTop="40dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Start"
-            android:textAllCaps="false"
-            android:background="@drawable/button_start_stop"
-            android:id="@+id/button_start_stop2"/>
-    </LinearLayout>
-    </LinearLayout>
+        android:layout_marginLeft="2dp"
+        android:id="@+id/include_simultaneous_container_2"
+        layout="@layout/include_simultaneous_interval"
+        />
+
+</LinearLayout>
     <Button
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"

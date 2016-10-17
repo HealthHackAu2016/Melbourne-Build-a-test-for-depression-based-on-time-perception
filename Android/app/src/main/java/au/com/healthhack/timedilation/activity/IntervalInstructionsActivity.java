@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import com.androidquery.AQuery;
@@ -13,6 +14,7 @@ import net.servicestack.func.Func;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import au.com.healthhack.timedilation.R;
@@ -22,6 +24,7 @@ import au.com.healthhack.timedilation.dal.TestSession;
 import au.com.healthhack.timedilation.dal.api.ApiConstants;
 import au.com.healthhack.timedilation.dal.api.IntervalTiming;
 import au.com.healthhack.timedilation.dal.api.TestResult;
+import au.com.healthhack.timedilation.util.FuncEx;
 import au.com.healthhack.timedilation.util.IntentUtil;
 
 /**
@@ -29,6 +32,7 @@ import au.com.healthhack.timedilation.util.IntentUtil;
  */
 
 public class IntervalInstructionsActivity extends AppCompatActivity {
+    public static final String TAG = "IntervalInstructions";
     private TestSession testSession;
     private String testName;
     private AQuery aq;
@@ -136,6 +140,10 @@ public class IntervalInstructionsActivity extends AppCompatActivity {
         Collections.shuffle(firstDurations);
         ArrayList<Integer> secondDurations = new ArrayList<>(firstDurations);//clone
         Collections.shuffle(secondDurations);
+        while(anyInSamePosition(firstDurations, secondDurations)){
+            Log.d(TAG, "reshuffling because duration in same position in both lists");
+            Collections.shuffle(secondDurations);//shuffle a list until they don't match
+        }
         for(int i =0;i<firstDurations.size();i++){
             TestResult screen = new TestResult();
             screen.TestName=ApiConstants.TEST_SIMULTANEOUS_INTERVALS;
@@ -152,6 +160,13 @@ public class IntervalInstructionsActivity extends AppCompatActivity {
         String authId = getSharedPreferences(AppConfig.PREFS_FILE_USERPREFS,0).getString(AppConfig.PREF_KEY_AUTH_ID,null);
         result.setAuthId(authId);
         return result;
+    }
+
+    private boolean anyInSamePosition(List<?> a, List<?> b){
+        for(int i=0;i<a.size();i++){
+            if(FuncEx.equal(a.get(i),b.get(i)))return true;
+        }
+        return false;
     }
 
 }
